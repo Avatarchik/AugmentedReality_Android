@@ -1,6 +1,6 @@
 ./obj/local/mips/objs/nftSimpleNative/ARMarkerNFT.o: jni/ARMarkerNFT.c \
   jni/ARMarkerNFT.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/ar.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/ar.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/stdio.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/stdio.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/sys/cdefs.h \
@@ -45,25 +45,25 @@
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/linux/errno.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/asm/errno.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/asm-generic/errno-base.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/config.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/arConfig.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/config.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/arConfig.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/jni.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/android/log.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/matrix.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/matrix.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/math.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/math.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/icp.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/icpCore.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/param.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/arImageProc.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/arFilterTransMat.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/icp.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/icpCore.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/param.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/arImageProc.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/arFilterTransMat.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/sys/param.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/linux/param.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/asm/param.h
 
 jni/ARMarkerNFT.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/ar.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/ar.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/stdio.h:
 
@@ -153,29 +153,29 @@ jni/../../../../../ARSDKAndroid/android/../include/AR/ar.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/asm-generic/errno-base.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/config.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/config.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/arConfig.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/arConfig.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/jni.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/android/log.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/matrix.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/matrix.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/math.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/math.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/icp.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/icp.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/icpCore.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/icpCore.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/param.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/param.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/arImageProc.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/arImageProc.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/arFilterTransMat.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/arFilterTransMat.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/sys/param.h:
 

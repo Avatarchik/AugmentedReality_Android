@@ -34,7 +34,7 @@
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/machine/kernel.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/sys/sysmacros.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/memory.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/ar.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/ar.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/stdio.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/stdio.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/wchar.h \
@@ -45,36 +45,36 @@
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/linux/errno.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/asm/errno.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/asm-generic/errno-base.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/config.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/arConfig.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/matrix.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/config.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/arConfig.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/matrix.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/math.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/math.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/icp.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/icpCore.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/param.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/arImageProc.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/arMulti.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/video.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/videoConfig.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/sys/videoAndroid.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/gsub_es.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/icp.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/icpCore.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/param.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/arImageProc.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/arMulti.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/video.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/videoConfig.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/sys/videoAndroid.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/gsub_es.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/GLES/gl.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/GLES/glplatform.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/KHR/khrplatform.h \
   /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/GLES/glext.h \
-  jni/../../../../../ARSDKAndroid/android/../include/glStateCache.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR/arFilterTransMat.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR2/tracking.h \
-  jni/../../../../../ARSDKAndroid/android/../include/thread_sub.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR2/config.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR2/featureSet.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR2/imageSet.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR2/template.h \
-  jni/../../../../../ARSDKAndroid/android/../include/AR2/marker.h \
+  jni/../../../../../ar_sdk_android/android/../include/glStateCache.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR/arFilterTransMat.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR2/tracking.h \
+  jni/../../../../../ar_sdk_android/android/../include/thread_sub.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR2/config.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR2/featureSet.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR2/imageSet.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR2/template.h \
+  jni/../../../../../ar_sdk_android/android/../include/AR2/marker.h \
   jni/ARMarkerNFT.h jni/trackingSub.h \
-  jni/../../../../../ARSDKAndroid/android/../include/KPM/kpm.h \
-  jni/../../../../../ARSDKAndroid/android/../include/KPM/kpmType.h
+  jni/../../../../../ar_sdk_android/android/../include/KPM/kpm.h \
+  jni/../../../../../ar_sdk_android/android/../include/KPM/kpmType.h
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/jni.h:
 
@@ -146,7 +146,7 @@
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/memory.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/ar.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/ar.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/stdio.h:
 
@@ -168,33 +168,33 @@ jni/../../../../../ARSDKAndroid/android/../include/AR/ar.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/asm-generic/errno-base.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/config.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/config.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/arConfig.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/arConfig.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/matrix.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/matrix.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/math.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/math.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/icp.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/icp.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/icpCore.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/icpCore.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/param.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/param.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/arImageProc.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/arImageProc.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/arMulti.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/arMulti.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/video.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/video.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/videoConfig.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/videoConfig.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/sys/videoAndroid.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/sys/videoAndroid.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/gsub_es.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/gsub_es.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/GLES/gl.h:
 
@@ -204,28 +204,28 @@ jni/../../../../../ARSDKAndroid/android/../include/AR/gsub_es.h:
 
 /home/hienbx94/Android/Sdk/ndk-bundle/platforms/android-15/arch-mips/usr/include/GLES/glext.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/glStateCache.h:
+jni/../../../../../ar_sdk_android/android/../include/glStateCache.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR/arFilterTransMat.h:
+jni/../../../../../ar_sdk_android/android/../include/AR/arFilterTransMat.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR2/tracking.h:
+jni/../../../../../ar_sdk_android/android/../include/AR2/tracking.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/thread_sub.h:
+jni/../../../../../ar_sdk_android/android/../include/thread_sub.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR2/config.h:
+jni/../../../../../ar_sdk_android/android/../include/AR2/config.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR2/featureSet.h:
+jni/../../../../../ar_sdk_android/android/../include/AR2/featureSet.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR2/imageSet.h:
+jni/../../../../../ar_sdk_android/android/../include/AR2/imageSet.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR2/template.h:
+jni/../../../../../ar_sdk_android/android/../include/AR2/template.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/AR2/marker.h:
+jni/../../../../../ar_sdk_android/android/../include/AR2/marker.h:
 
 jni/ARMarkerNFT.h:
 
 jni/trackingSub.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/KPM/kpm.h:
+jni/../../../../../ar_sdk_android/android/../include/KPM/kpm.h:
 
-jni/../../../../../ARSDKAndroid/android/../include/KPM/kpmType.h:
+jni/../../../../../ar_sdk_android/android/../include/KPM/kpmType.h:
