@@ -1,1 +1,1 @@
-include ':app', ':aRBaseLib'
+Augmented Reality Android
