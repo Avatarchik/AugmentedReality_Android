@@ -51,7 +51,7 @@ public class ArApplication extends Application {
     	sInstance = this;
     	((ArApplication) sInstance).initializeInstance();
     }
-    
+    00
     protected void initializeInstance() {
     	PreferenceManager.setDefaultValues(this, org.artoolkit.ar.base.R.xml.preferences, false);
     	

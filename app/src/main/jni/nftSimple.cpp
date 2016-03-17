@@ -120,7 +120,7 @@ enum viewPortIndices {
 // ============================================================================
 
 // Utility preprocessor directive so only one change needed if Java class name changes
-#define JNIFUNCTION_NATIVE(sig) Java_com_freedom_augmentedreality_MainActivity_##sig
+#define JNIFUNCTION_NATIVE(sig) Java_com_freedom_augmentedreality_ArActivity_##sig
 
 extern "C" {
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject object, jobject instanceOfAndroidContext));
@@ -764,23 +764,24 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeSetInternetState(JNIEnv* env, jo
 static bool layoutARView(void)
 {
 	if (gDisplayOrientation == 0) {
-		gContentRotate90 = true;
+		gContentRotate90 = false;
 		gContentFlipV = false;
 		gContentFlipH = gCameraIsFrontFacing;
 	} else if (gDisplayOrientation == 1) {
-		gContentRotate90 = false;
+		gContentRotate90 = true;
 		gContentFlipV = false;
 		gContentFlipH = gCameraIsFrontFacing;
 	} else if (gDisplayOrientation == 2) {
-		gContentRotate90 = true;
+		gContentRotate90 = false;
 		gContentFlipV = true;
 		gContentFlipH = (!gCameraIsFrontFacing);
 	} else if (gDisplayOrientation == 3) {
-		gContentRotate90 = false;
+		gContentRotate90 = true;
 		gContentFlipV = true;
 		gContentFlipH = (!gCameraIsFrontFacing);
 	}
     arglSetRotate90(gArglSettings, gContentRotate90);
+
     arglSetFlipV(gArglSettings, gContentFlipV);
     arglSetFlipH(gArglSettings, gContentFlipH);
 
@@ -931,7 +932,8 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeDrawFrame(JNIEnv* env, jobject o
         arglPixelBufferDataUploadBiPlanar(gArglSettings, gVideoFrame, gVideoFrame + videoWidth*videoHeight);
         videoFrameNeedsPixelBufferDataUpload = false;
     }
-    
+
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the buffers for new frame.
     
     // Display the current frame

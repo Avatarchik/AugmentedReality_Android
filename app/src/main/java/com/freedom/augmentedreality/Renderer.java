@@ -10,15 +10,14 @@ import android.opengl.GLSurfaceView;
 public class Renderer implements GLSurfaceView.Renderer {
  
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        MainActivity.nativeSurfaceCreated();
+        ArActivity.nativeSurfaceCreated();
     }
 
     public void onSurfaceChanged(GL10 gl, int w, int h) {
-        MainActivity.nativeSurfaceChanged(w, h);
+        ArActivity.nativeSurfaceChanged(w, h);
     }
 
     public void onDrawFrame(GL10 gl) {
-        MainActivity.nativeDrawFrame();
+        ArActivity.nativeDrawFrame();
     }
-    
 }

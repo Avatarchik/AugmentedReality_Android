@@ -87,6 +87,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
             parameters.setPreviewFrameRate(30);
             camera.setParameters(parameters);
 
+//			camera.setDisplayOrientation(90);
 
 			parameters = camera.getParameters();
     		int capWidth = parameters.getPreviewSize().width;
@@ -109,7 +110,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
             
             camera.startPreview();
 
-			MainActivity.nativeVideoInit(capWidth, capHeight, cameraIndex, frontFacing);
+			ArActivity.nativeVideoInit(capWidth, capHeight, cameraIndex, frontFacing);
 
     	}
     }
@@ -119,7 +120,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	public void onPreviewFrame(byte[] data, Camera cam) {
 
-		MainActivity.nativeVideoFrame(data);
+		ArActivity.nativeVideoFrame(data);
 		
 		cam.addCallbackBuffer(data);
 	}
