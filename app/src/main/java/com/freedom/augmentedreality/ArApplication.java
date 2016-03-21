@@ -9,12 +9,15 @@ import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.freedom.augmentedreality.helper.LruBitmapCache;
 
 public class ArApplication extends Application {
 
 	public static final String TAG = ArApplication.class.getSimpleName();
 	private RequestQueue mRequestQueue;
+	private ImageLoader mImageLoader;
 	private static ArApplication sInstance;
 	 
     public static synchronized ArApplication getInstance() {
@@ -27,6 +30,15 @@ public class ArApplication extends Application {
 		}
 
 		return mRequestQueue;
+	}
+
+	public ImageLoader getImageLoader() {
+		getRequestQueue();
+		if (mImageLoader == null) {
+			mImageLoader = new ImageLoader(this.mRequestQueue,
+					new LruBitmapCache());
+		}
+		return this.mImageLoader;
 	}
 
 	public <T> void addToRequestQueue(Request<T> req, String tag) {

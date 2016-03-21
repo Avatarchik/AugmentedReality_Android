@@ -9,4 +9,6 @@ public class AppConfig {
 
     // Server user register url
     public static String URL_REGISTER = "http://192.168.1.216:3000/api/registers";
+
+    public static String URL_ALLMARKER = "http://vntech.me:3000/api/markers";
 }
