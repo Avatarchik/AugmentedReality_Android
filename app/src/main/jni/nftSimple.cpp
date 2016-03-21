@@ -227,6 +227,10 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject 
 
     // Load marker(s).
     newMarkers(markerConfigDataFilename, &markersNFT, &markersNFTCount);
+
+    LOGE("AAAA = %s\n", markersNFT[0].datasetPathname);
+    LOGE("AAAA = %i\n", markersNFT[0].pageNo);
+
     if (!markersNFTCount) {
         LOGE("Error loading markers from config. file '%s'.", markerConfigDataFilename);
         return false;
@@ -764,24 +768,23 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeSetInternetState(JNIEnv* env, jo
 static bool layoutARView(void)
 {
 	if (gDisplayOrientation == 0) {
-		gContentRotate90 = false;
+		gContentRotate90 = true;
 		gContentFlipV = false;
 		gContentFlipH = gCameraIsFrontFacing;
 	} else if (gDisplayOrientation == 1) {
-		gContentRotate90 = true;
+		gContentRotate90 = false;
 		gContentFlipV = false;
 		gContentFlipH = gCameraIsFrontFacing;
 	} else if (gDisplayOrientation == 2) {
-		gContentRotate90 = false;
+		gContentRotate90 = true;
 		gContentFlipV = true;
 		gContentFlipH = (!gCameraIsFrontFacing);
 	} else if (gDisplayOrientation == 3) {
-		gContentRotate90 = true;
+		gContentRotate90 = false;
 		gContentFlipV = true;
 		gContentFlipH = (!gCameraIsFrontFacing);
 	}
     arglSetRotate90(gArglSettings, gContentRotate90);
-
     arglSetFlipV(gArglSettings, gContentFlipV);
     arglSetFlipH(gArglSettings, gContentFlipH);
 
@@ -932,8 +935,7 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeDrawFrame(JNIEnv* env, jobject o
         arglPixelBufferDataUploadBiPlanar(gArglSettings, gVideoFrame, gVideoFrame + videoWidth*videoHeight);
         videoFrameNeedsPixelBufferDataUpload = false;
     }
-
-
+    
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the buffers for new frame.
     
     // Display the current frame

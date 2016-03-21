@@ -59,8 +59,6 @@ public class ArActivity extends AppCompatActivity
 
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +85,7 @@ public class ArActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); // Force landscape-only.
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); // Force landscape-only.
         updateNativeDisplayParameters();
 
         ArActivity.nativeCreate(this);

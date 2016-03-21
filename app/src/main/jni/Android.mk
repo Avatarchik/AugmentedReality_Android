@@ -92,6 +92,7 @@ LOCAL_ARM_MODE := arm
 LOCAL_PATH := $(MY_LOCAL_PATH)
 LOCAL_MODULE := nftSimpleNative
 LOCAL_SRC_FILES := nftSimple.cpp ARMarkerNFT.c trackingSub.c
+LOCAL_CFLAGS    := -DDEBUG
 
 # Make sure DEBUG is defined for debug builds. (NDK already defines NDEBUG for release builds.)
 ifeq ($(APP_OPTIM),debug)
