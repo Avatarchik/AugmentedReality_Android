@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.freedom.augmentedreality.gcm.QuickstartPreferences;
 import com.freedom.augmentedreality.gcm.RegistrationIntentService;
+import com.freedom.augmentedreality.helper.SessionManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
@@ -33,43 +34,49 @@ public class SplashScreen extends AppCompatActivity {
 
     private static final String TAG = "SplashScreenActivity";
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-//        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash_screen);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        session = new SessionManager(getApplicationContext());
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            boolean sentToken = sharedPreferences
-                    .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
-            if (sentToken) {
-                Intent login = new Intent(SplashScreen.this, LoginActivity.class);
-                startActivity(login);
-                finish();
-            } else {
-                String temp = getString(R.string.token_error_message);
-                Toast.makeText(SplashScreen.this, temp, Toast.LENGTH_SHORT).show();
-            }
+                sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+                boolean sentToken = sharedPreferences
+                        .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
+                if (sentToken) {
+                    Intent i;
+                    if (session.isLoggedIn()) {
+                        i = new Intent(SplashScreen.this, ArActivity.class);
+
+                    } else {
+                        i = new Intent(SplashScreen.this, LoginActivity.class);
+                    }
+                    startActivity(i);
+                    finish();
+                } else {
+                    String temp = getString(R.string.token_error_message);
+                    Toast.makeText(SplashScreen.this, temp, Toast.LENGTH_SHORT).show();
+                }
             }
         };
 
         registerReceiver();
         if (checkPlayServices()) {
-//            if (sharedPreferences.getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false)) {
-//                Intent login = new Intent(SplashScreen.this, LoginActivity.class);
-//                startActivity(login);
-//                finish();
-//            } else {
+            if (sharedPreferences.getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false)) {
+                Intent login = new Intent(SplashScreen.this, LoginActivity.class);
+                startActivity(login);
+                finish();
+            } else {
                 Intent intent = new Intent(this, RegistrationIntentService.class);
                 startService(intent);
-//            }
+            }
 
         }
 

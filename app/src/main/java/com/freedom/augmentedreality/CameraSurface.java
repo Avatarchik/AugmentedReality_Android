@@ -110,7 +110,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
             
             camera.startPreview();
 
-			ArActivity.nativeVideoInit(capWidth, capHeight, cameraIndex, frontFacing);
+//			ArActivity.nativeVideoInit(capWidth, capHeight, cameraIndex, frontFacing);
 
     	}
     }
@@ -120,7 +120,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	public void onPreviewFrame(byte[] data, Camera cam) {
 
-		ArActivity.nativeVideoFrame(data);
+//		ArActivity.nativeVideoFrame(data);
 		
 		cam.addCallbackBuffer(data);
 	}

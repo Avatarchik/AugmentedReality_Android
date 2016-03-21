@@ -5,7 +5,7 @@ package com.freedom.augmentedreality.app;
  */
 public class AppConfig {
     static String baseURL = "http://192.168.15.103:3000";
-    // Server user login url
+
     public static String URL_LOGIN = baseURL + "/api/logins";
     public static String URL_CREATE_MARKER  = baseURL+"/api/markers";
 
