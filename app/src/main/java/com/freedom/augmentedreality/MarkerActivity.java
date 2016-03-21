@@ -160,7 +160,7 @@ public class MarkerActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
 
                         final CreateDialog c = new CreateDialog(this, bitmap);
-                        c.setTitle("Create marker");
+                        c.setTitle("Enter marker name");
                         c.setCanceledOnTouchOutside(false);
                         c.btCreateMarker.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -228,6 +228,7 @@ public class MarkerActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("name", markerName);
                 params.put("base64", encoded);
+
                 return params;
             }
 
