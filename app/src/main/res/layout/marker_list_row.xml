@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/list_row_selector"
     android:padding="8dp" >
 
     <!-- Thumbnail Image -->
@@ -20,22 +21,15 @@
         android:text="Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/image_marker"
         android:layout_toRightOf="@+id/image_marker"
-        android:textSize="17dp"
+        android:textSize="15dp"
         android:textStyle="bold" />
 
-    <!-- Genre -->
     <TextView
-        android:id="@+id/genre"
-        android:layout_width="fill_parent"
+        android:id="@+id/txt_create_at"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name_marker"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/image_marker"
-        android:textColor="#666666"
-        android:textSize="13dip" />
-
-
-
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+     />
 </RelativeLayout>

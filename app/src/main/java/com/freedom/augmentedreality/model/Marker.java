@@ -10,6 +10,7 @@ public class Marker {
     String _iset;
     String _fset;
     String _fset3;
+    String created_at;
 
     public void set_id(int _id) {
         this._id = _id;
@@ -21,6 +22,10 @@ public class Marker {
 
     public void set_image(String _image) {
         this._image = _image;
+    }
+
+    public void set_created_at(String created_at) {
+        this.created_at = created_at;
     }
 
     public void set_iset(String _iset) {
@@ -48,13 +53,14 @@ public class Marker {
 
     }
 
-    public Marker(int _id, String _name, String _image, String _iset, String _fset, String _fset3) {
+    public Marker(int _id, String _name, String _image, String _iset, String _fset, String _fset3, String created_at) {
         this._id = _id;
         this._name = _name;
         this._image = _image;
         this._iset = _iset;
         this._fset = _fset;
         this._fset3 = _fset3;
+        this.created_at = created_at;
     }
 
     public String get_iset() {
@@ -67,6 +73,10 @@ public class Marker {
 
     public String get_fset3() {
         return _fset3;
+    }
+
+    public String getCreatedAt() {
+        return created_at;
     }
 
     public int get_id() {

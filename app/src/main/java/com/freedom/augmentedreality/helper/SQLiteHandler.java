@@ -12,9 +12,6 @@ import com.freedom.augmentedreality.model.Marker;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by hienbx94 on 3/21/16.
- */
 public class SQLiteHandler extends SQLiteOpenHelper {
 
     private static final String TAG = SQLiteHandler.class.getSimpleName();
@@ -23,42 +20,67 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "android_api";
 
-    // Login table name
     private static final String TABLE_MARKER = "marker";
+    private static final String TABLE_USER = "user";
 
-    // Login Table Columns names
+
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
+
     private static final String KEY_IMAGE = "image";
     private static final String KEY_ISET = "iset";
     private static final String KEY_FSET = "fset";
     private static final String KEY_FSET3 = "fset3";
     private static final String KEY_STT = "stt";
 
+    private static final String KEY_EMAIL = "email";
+
+    private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER + "("
+            + KEY_ID + " INTEGER,"
+            + KEY_STT + " INTEGER PRIMARY KEY,"
+            + KEY_NAME + " TEXT,"
+            + KEY_EMAIL + "TEXT,"
+            + ")";
+
+    private static final String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_MARKER + "("
+            + KEY_ID + " INTEGER,"
+            + KEY_STT + " INTEGER PRIMARY KEY,"
+            + KEY_NAME + " TEXT,"
+            + KEY_IMAGE + " TEXT UNIQUE,"
+            + KEY_ISET + " TEXT,"
+            + KEY_FSET3 + " TEXT,"
+            + KEY_FSET + " TEXT"
+            + ")";
+
     public SQLiteHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_MARKER + "("
-                + KEY_ID + " INTEGER," + KEY_STT + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_IMAGE + " TEXT UNIQUE," + KEY_ISET + " TEXT," + KEY_FSET3 + " TEXT,"
-                + KEY_FSET + " TEXT" + ")";
         db.execSQL(CREATE_LOGIN_TABLE);
+        db.execSQL(CREATE_TABLE_USER);
 
         Log.d(TAG, "Database tables created");
     }
 
-    // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MARKER);
-
-        // Create tables again
+        db.execSQL("DROP TABLE IF EXISTS " + CREATE_TABLE_USER);
         onCreate(db);
+    }
+
+    public void addUser(int id, String name, String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, id);
+        values.put(KEY_NAME, name);
+        values.put(KEY_EMAIL, email);
+
+
+        db.insert(TABLE_USER, null, values);
     }
 
     public void addMarker(Marker marker) {
@@ -73,7 +95,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_FSET3, marker.get_fset3());
 
         db.insert(TABLE_MARKER, null, values);
-        db.close();
     }
 
     public List<Marker> getAllMarkers() {
@@ -94,6 +115,19 @@ public class SQLiteHandler extends SQLiteOpenHelper {
                 markerList.add(marker);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return markerList;
+    }
+
+    public void deleteMarkers() {
+        String selectQuery = "DELETE FROM " + TABLE_MARKER;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.rawQuery(selectQuery, null);
+    }
+
+    public void closeDB() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null && db.isOpen())
+            db.close();
     }
 }

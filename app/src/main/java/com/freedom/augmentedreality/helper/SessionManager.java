@@ -19,7 +19,7 @@ public class SessionManager {
 
     int PRIVATE_MODE = 0;
 
-    private static final String PREF_NAME = "Login";
+    private static final String PREF_NAME = "AugmentedReality";
 
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
@@ -36,6 +36,27 @@ public class SessionManager {
         editor.commit();
 
         Log.d(TAG, "User login session modified!");
+    }
+
+    public void setRegToken(String reg_token) {
+        editor.putString("reg_token", reg_token);
+
+        editor.commit();
+
+        Log.d(TAG, "Reg token modified!");
+    }
+
+    public String getRegToken() {
+        return pref.getString("reg_token", "");
+    }
+
+    public void addValue(String key, String value) {
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+    public String getValue(String key){
+        return pref.getString(key, "");
     }
 
     public boolean isLoggedIn(){
