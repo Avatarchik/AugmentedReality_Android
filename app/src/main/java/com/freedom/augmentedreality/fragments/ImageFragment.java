@@ -96,7 +96,7 @@ public class ImageFragment extends Fragment {
                 try {
                     JSONObject jObj = new JSONObject(response);
                     if (!jObj.has("errors")) {
-                        JSONObject marker = new JSONObject("marker");
+                        JSONObject marker = jObj.getJSONObject("marker");
                         Integer id = marker.getInt("id");
                         String name = marker.getString("name");
                         String image = marker.getString("image");
