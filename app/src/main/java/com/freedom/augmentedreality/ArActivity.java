@@ -2,8 +2,6 @@ package com.freedom.augmentedreality;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.freedom.augmentedreality.detect.CameraActivity;
 import com.freedom.augmentedreality.fragments.MarkerFragment;
 import com.freedom.augmentedreality.helper.SessionManager;
 
@@ -94,7 +93,8 @@ public class ArActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-
+            Intent i = new Intent(ArActivity.this, CameraActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_marker) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -120,7 +120,7 @@ enum viewPortIndices {
 // ============================================================================
 
 // Utility preprocessor directive so only one change needed if Java class name changes
-#define JNIFUNCTION_NATIVE(sig) Java_com_freedom_augmentedreality_ArActivity_##sig
+#define JNIFUNCTION_NATIVE(sig) Java_com_freedom_augmentedreality_detect_CameraActivity_##sig
 
 extern "C" {
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject object, jobject instanceOfAndroidContext));
@@ -227,10 +227,6 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject 
 
     // Load marker(s).
     newMarkers(markerConfigDataFilename, &markersNFT, &markersNFTCount);
-
-    LOGE("AAAA = %s\n", markersNFT[0].datasetPathname);
-    LOGE("AAAA = %i\n", markersNFT[0].pageNo);
-
     if (!markersNFTCount) {
         LOGE("Error loading markers from config. file '%s'.", markerConfigDataFilename);
         return false;
