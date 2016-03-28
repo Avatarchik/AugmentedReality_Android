@@ -2,6 +2,7 @@ package com.freedom.augmentedreality.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.PackageInstaller;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.freedom.augmentedreality.app.ArApplication;
 import com.freedom.augmentedreality.R;
 import com.freedom.augmentedreality.app.AppConfig;
+import com.freedom.augmentedreality.helper.SessionManager;
 import com.freedom.augmentedreality.model.Marker;
 
 import org.json.JSONException;
@@ -37,6 +40,7 @@ public class ImageFragment extends Fragment {
     private Button btn_create;
     private EditText marker_name;
     private ProgressDialog pDialog;
+    private SessionManager session;
     public ImageFragment() {
         // Required empty public constructor
     }
@@ -47,6 +51,7 @@ public class ImageFragment extends Fragment {
         data = getArguments().getParcelable("image");
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
+        session = new SessionManager(getActivity().getApplicationContext());
     }
 
     @Override
@@ -101,7 +106,8 @@ public class ImageFragment extends Fragment {
                         String fset = marker.getString("fset");
                         String fset3 = marker.getString("fset3");
                         String created_at = marker.getString("created_at");
-                        Marker temp = new Marker(id, name, image, iset, fset, fset3, created_at);
+                        String user_name = marker.getString("user_name");
+                        Marker temp = new Marker(id, name, image, iset, fset, fset3, created_at, user_name);
 
                         getActivity().getSupportFragmentManager().popBackStack();
 
@@ -134,6 +140,12 @@ public class ImageFragment extends Fragment {
                 return params;
             }
 
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("Authorization", session.getValue("auth_token"));
+                return map;
+            }
         };
 
         ArApplication.getInstance().addToRequestQueue(strReq, tag_string_req);

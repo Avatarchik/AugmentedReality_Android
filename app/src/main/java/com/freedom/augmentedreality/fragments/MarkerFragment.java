@@ -219,7 +219,8 @@ public class MarkerFragment extends Fragment {
                         String fset = marker.getString("fset");
                         String fset3 = marker.getString("fset3");
                         String created_at = marker.getString("created_at");
-                        Marker temp = new Marker(id, name, image, iset, fset, fset3, created_at);
+                        String user_name = marker.getString("user_name");
+                        Marker temp = new Marker(id, name, image, iset, fset, fset3, created_at, user_name);
                         markerList.add(temp);
                     }
 

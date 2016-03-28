@@ -22,7 +22,7 @@ public class MarkersAdapter extends RecyclerView.Adapter<MarkersAdapter.MyViewHo
     private List<Marker> markersList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, create_at;
+        public TextView name, create_at, user_name;
         public NetworkImageView image;
 
         public MyViewHolder(View view) {
@@ -30,6 +30,7 @@ public class MarkersAdapter extends RecyclerView.Adapter<MarkersAdapter.MyViewHo
             name = (TextView) view.findViewById(R.id.name_marker);
             create_at = (TextView) view.findViewById(R.id.txt_create_at);
             image = (NetworkImageView) view.findViewById(R.id.image_marker);
+            user_name = (TextView) view.findViewById(R.id.user_name);
         }
     }
 
@@ -51,6 +52,7 @@ public class MarkersAdapter extends RecyclerView.Adapter<MarkersAdapter.MyViewHo
         Marker marker = markersList.get(position);
         holder.name.setText(marker.get_name());
         holder.create_at.setText(marker.getCreatedAt());
+        holder.user_name.setText(marker.getUserName());
         String image_link = AppConfig.baseURL + marker.get_image();
         holder.image.setImageUrl(image_link, ArApplication.getInstance().getImageLoader());
     }
