@@ -18,11 +18,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.freedom.augmentedreality.app.AppConfig;
 import com.freedom.augmentedreality.gcm.QuickstartPreferences;
+import com.freedom.augmentedreality.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -67,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = inputPassword.getText().toString().trim();
                 String password_confirmation = inputPasswordConfirmation.getText().toString().trim();
 
-                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty() && password.equals(password_confirmation)) {
+                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
                     registerUser(name, email, password, password_confirmation);
                 } else {
                     Toast.makeText(getApplicationContext(),
@@ -90,14 +92,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
-                Log.d("Registering", "Register Response: " + response.toString());
                 hideDialog();
 
                 try {
                     JSONObject jObj = new JSONObject(response.toString());
-                    boolean error = jObj.getBoolean("error");
 
-                    if (!error) {
+                    if (!jObj.has("errors")) {
                         Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 
                         Intent intent = new Intent(
@@ -107,7 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(),
-                                "Register fail", Toast.LENGTH_LONG).show();
+                                jObj.getJSONObject("errors").toString(), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -128,14 +128,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 // Posting params to register url
-                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                String reg_token = sharedPreferences.getString(QuickstartPreferences.REG_TOKEN, "");
+                SessionManager session = new SessionManager(getApplicationContext());
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
                 params.put("password_confirmation", password_confirmation);
-                params.put("reg_token", reg_token);
+                params.put("reg_token", session.getRegToken());
 
                 return params;
             }

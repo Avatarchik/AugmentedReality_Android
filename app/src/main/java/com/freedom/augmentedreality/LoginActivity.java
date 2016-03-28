@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.freedom.augmentedreality.app.AppConfig;
+import com.freedom.augmentedreality.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,11 +50,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
                         RegisterActivity.class);
-//                Intent i = new Intent(getApplicationContext(),
-//                        nftSimpleActivity.class);
-//                startActivity(i);
-//                Intent i = new Intent(getApplicationContext(),
-//                        MainActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -65,12 +61,9 @@ public class LoginActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
-                // Check for empty data in the form
                 if (!email.isEmpty() && !password.isEmpty()) {
-                    // login user
                     checkLogin(email, password);
                 } else {
-                    // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext(),
                             "Please enter the credentials!", Toast.LENGTH_LONG)
                             .show();
@@ -91,28 +84,31 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
                 hideDialog();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
+                    if (!jObj.has("errors")) {
+                        SessionManager session = new SessionManager(getApplicationContext());
+                        session.setLogin(true);
 
-                    if (!error) {
+                        session.addValue("id", String.valueOf(jObj.getInt("id")));
+                        session.addValue("name", jObj.getString("name"));
+                        session.addValue("email", jObj.getString("email"));
+                        session.addValue("auth_token", jObj.getString("auth_token"));
 
-//                        Intent intent = new Intent(LoginActivity.this,
-//                                MainActivity.class);
-//                        startActivity(intent);
-//                        finish();
+                        Intent intent = new Intent(LoginActivity.this,
+                                ArActivity.class);
+                        startActivity(intent);
+                        finish();
                     } else {
-
+                        String errors = jObj.getString("errors");
                         Toast.makeText(getApplicationContext(),
-                                "Login fail", Toast.LENGTH_LONG).show();
+                                errors, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
-                    // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+
                 }
 
             }
@@ -120,7 +116,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
@@ -129,11 +124,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             protected Map<String, String> getParams() {
-                // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email", email);
                 params.put("password", password);
-
                 return params;
             }
 

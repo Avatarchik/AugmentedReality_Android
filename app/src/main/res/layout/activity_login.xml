@@ -43,14 +43,6 @@
 
         <!-- Login Button -->
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remember me"
-            android:textColor="@color/white"
-            android:buttonTint="@color/white"
-            android:id="@+id/checkBox" />
-
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="fill_parent"

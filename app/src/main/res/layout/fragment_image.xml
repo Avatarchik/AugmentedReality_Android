@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d9d9d9"
+    android:padding="10dp"
+    android:orientation="vertical"
+    tools:context="com.freedom.augmentedreality.fragments.ImageFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:id="@+id/img_image"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                 />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="20px"
+                android:hint="Marker name"
+                android:background="@drawable/list_row_bg"
+                android:id="@+id/marker_name"
+                />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_marginTop="20px"
+                android:text="Create marker"
+                android:background="@drawable/list_row_bg"
+                android:id="@+id/btn_create" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

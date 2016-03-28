@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.freedom.augmentedreality.ArApplication;
 import com.freedom.augmentedreality.R;
+import com.freedom.augmentedreality.app.AppConfig;
 import com.freedom.augmentedreality.model.Marker;
 
 import java.io.IOException;
@@ -28,12 +29,13 @@ public class MarkersAdapter extends RecyclerView.Adapter<MarkersAdapter.MyViewHo
     private List<Marker> markersList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
+        public TextView name, create_at;
         public NetworkImageView image;
 
         public MyViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name_marker);
+            create_at = (TextView) view.findViewById(R.id.txt_create_at);
             image = (NetworkImageView) view.findViewById(R.id.image_marker);
         }
     }
@@ -55,7 +57,8 @@ public class MarkersAdapter extends RecyclerView.Adapter<MarkersAdapter.MyViewHo
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Marker marker = markersList.get(position);
         holder.name.setText(marker.get_name());
-        String image_link = "http://vntech.me:3000/" + marker.get_image();
+        holder.create_at.setText(marker.getCreatedAt());
+        String image_link = AppConfig.baseURL + marker.get_image();
         holder.image.setImageUrl(image_link, ArApplication.getInstance().getImageLoader());
     }
 

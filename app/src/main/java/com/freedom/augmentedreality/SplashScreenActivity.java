@@ -5,74 +5,67 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.freedom.augmentedreality.gcm.QuickstartPreferences;
 import com.freedom.augmentedreality.gcm.RegistrationIntentService;
+import com.freedom.augmentedreality.helper.SessionManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
-import java.io.IOException;
-
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
 
     public static final String GCM_TOKEN = "gcmToken";
-    SharedPreferences sharedPreferences;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private boolean isReceiverRegistered;
 
     private static final String TAG = "SplashScreenActivity";
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private SessionManager session;
+
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-//        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash_screen);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        session = new SessionManager(getApplicationContext());
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-            boolean sentToken = sharedPreferences
-                    .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
-            if (sentToken) {
-                Intent login = new Intent(SplashScreen.this, LoginActivity.class);
-                startActivity(login);
-                finish();
-            } else {
-                String temp = getString(R.string.token_error_message);
-                Toast.makeText(SplashScreen.this, temp, Toast.LENGTH_SHORT).show();
-            }
+                token = intent.getStringExtra("reg_token");
+                session.setRegToken(token);
+
+                if (token != "") {
+                    Intent i;
+                    if (session.isLoggedIn()) {
+                        i = new Intent(SplashScreenActivity.this, ArActivity.class);
+
+                    } else {
+                        i = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                    }
+                    startActivity(i);
+                    finish();
+                } else {
+                    String temp = getString(R.string.token_error_message);
+                    Toast.makeText(SplashScreenActivity.this, temp, Toast.LENGTH_SHORT).show();
+                }
             }
         };
 
         registerReceiver();
         if (checkPlayServices()) {
-//            if (sharedPreferences.getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false)) {
-//                Intent login = new Intent(SplashScreen.this, LoginActivity.class);
-//                startActivity(login);
-//                finish();
-//            } else {
-                Intent intent = new Intent(this, RegistrationIntentService.class);
-                startService(intent);
-//            }
-
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
         }
-
     }
 
     @Override
