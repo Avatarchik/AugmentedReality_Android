@@ -2,7 +2,6 @@ package com.freedom.augmentedreality.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,11 +18,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.freedom.augmentedreality.ArActivity;
-import com.freedom.augmentedreality.ArApplication;
+import com.freedom.augmentedreality.app.ArApplication;
 import com.freedom.augmentedreality.R;
 import com.freedom.augmentedreality.app.AppConfig;
-import com.freedom.augmentedreality.helper.SessionManager;
 import com.freedom.augmentedreality.model.Marker;
 
 import org.json.JSONException;

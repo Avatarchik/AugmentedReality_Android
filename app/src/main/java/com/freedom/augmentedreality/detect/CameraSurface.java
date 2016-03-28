@@ -47,7 +47,7 @@
  *
  */
 
-package com.freedom.augmentedreality;
+package com.freedom.augmentedreality.detect;
 
 import java.io.IOException;
 import android.annotation.SuppressLint;
@@ -60,6 +60,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.freedom.augmentedreality.R;
 import com.freedom.augmentedreality.detect.CameraActivity;
 
 public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback, Camera.PreviewCallback {

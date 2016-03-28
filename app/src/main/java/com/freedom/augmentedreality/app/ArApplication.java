@@ -1,5 +1,5 @@
 
-package com.freedom.augmentedreality;
+package com.freedom.augmentedreality.app;
 
 import org.artoolkit.ar.base.assets.AssetHelper;
 

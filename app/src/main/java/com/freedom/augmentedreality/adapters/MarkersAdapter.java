@@ -1,24 +1,17 @@
 package com.freedom.augmentedreality.adapters;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Movie;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.freedom.augmentedreality.ArApplication;
+import com.freedom.augmentedreality.app.ArApplication;
 import com.freedom.augmentedreality.R;
 import com.freedom.augmentedreality.app.AppConfig;
 import com.freedom.augmentedreality.model.Marker;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 /**
