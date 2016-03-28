@@ -47,7 +47,7 @@
  *
  */
 
-package com.freedom.augmentedreality;
+package com.freedom.augmentedreality.detect;
 
 
 import javax.microedition.khronos.egl.EGLConfig;

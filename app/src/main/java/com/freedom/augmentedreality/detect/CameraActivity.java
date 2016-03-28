@@ -16,9 +16,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.view.ViewGroup.LayoutParams;
 
-import com.freedom.augmentedreality.CameraSurface;
 import com.freedom.augmentedreality.R;
-import com.freedom.augmentedreality.Renderer;
 
 public class CameraActivity extends AppCompatActivity {
 

@@ -4,8 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +13,7 @@ import android.widget.Toast;
 import com.freedom.augmentedreality.gcm.QuickstartPreferences;
 import com.freedom.augmentedreality.gcm.RegistrationIntentService;
 import com.freedom.augmentedreality.helper.SessionManager;
+import com.freedom.augmentedreality.user.LoginActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 

@@ -1,12 +1,9 @@
-package com.freedom.augmentedreality;
+package com.freedom.augmentedreality.user;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,101 +13,104 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.freedom.augmentedreality.ArActivity;
+import com.freedom.augmentedreality.app.ArApplication;
+import com.freedom.augmentedreality.R;
 import com.freedom.augmentedreality.app.AppConfig;
-import com.freedom.augmentedreality.gcm.QuickstartPreferences;
 import com.freedom.augmentedreality.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-public class RegisterActivity extends AppCompatActivity {
-    private Button btnLinkToLogin;
-    private Button btnRegister;
-    private EditText inputFullName;
+public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = RegisterActivity.class.getSimpleName();
+    private Button btnLinkToRegister;
+    private Button btnLogin;
     private EditText inputEmail;
     private EditText inputPassword;
-    private EditText inputPasswordConfirmation;
     private ProgressDialog pDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
-//        getSupportActionBar().hide();
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
 
-        inputFullName = (EditText) findViewById(R.id.name);
+        btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
-        inputPasswordConfirmation = (EditText) findViewById(R.id.password_confirmation);
-
-        btnRegister = (Button) findViewById(R.id.btnRegister);
-        btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
-        btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
+        btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                        LoginActivity.class);
+                        RegisterActivity.class);
                 startActivity(i);
                 finish();
             }
         });
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
-                String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
-                String password_confirmation = inputPasswordConfirmation.getText().toString().trim();
 
-                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                    registerUser(name, email, password, password_confirmation);
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    checkLogin(email, password);
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
+                            "Please enter the credentials!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
+
         });
     }
-
-    private void registerUser(final String name, final String email,
-                              final String password, final String password_confirmation) {
+    private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
-        String tag_string_req = "req_register";
+        String tag_string_req = "req_login";
 
-        pDialog.setMessage("Registering ...");
+        pDialog.setMessage("Logging in ...");
         showDialog();
+
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_REGISTER, new Response.Listener<String>() {
+                AppConfig.URL_LOGIN, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 hideDialog();
 
                 try {
-                    JSONObject jObj = new JSONObject(response.toString());
-
+                    JSONObject jObj = new JSONObject(response);
                     if (!jObj.has("errors")) {
-                        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+                        SessionManager session = new SessionManager(getApplicationContext());
+                        session.setLogin(true);
 
-                        Intent intent = new Intent(
-                                RegisterActivity.this,
-                                LoginActivity.class);
+                        session.addValue("id", String.valueOf(jObj.getInt("id")));
+                        session.addValue("name", jObj.getString("name"));
+                        session.addValue("email", jObj.getString("email"));
+                        session.addValue("auth_token", jObj.getString("auth_token"));
+
+                        Intent intent = new Intent(LoginActivity.this,
+                                ArActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
+                        String errors = jObj.getString("errors");
                         Toast.makeText(getApplicationContext(),
-                                jObj.getJSONObject("errors").toString(), Toast.LENGTH_LONG).show();
+                                errors, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
 
             }
@@ -118,7 +118,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Registering", "Registration Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
@@ -127,15 +126,9 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             protected Map<String, String> getParams() {
-                // Posting params to register url
-                SessionManager session = new SessionManager(getApplicationContext());
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
-                params.put("password_confirmation", password_confirmation);
-                params.put("reg_token", session.getRegToken());
-
                 return params;
             }
 
@@ -143,6 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         ArApplication.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
     private void showDialog() {
         if (!pDialog.isShowing())
             pDialog.show();

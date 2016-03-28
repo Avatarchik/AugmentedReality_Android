@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.freedom.augmentedreality.detect.CameraActivity;
 import com.freedom.augmentedreality.fragments.MarkerFragment;
 import com.freedom.augmentedreality.helper.SessionManager;
+import com.freedom.augmentedreality.user.LoginActivity;
 
 public class ArActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
