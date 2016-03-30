@@ -16,9 +16,13 @@
 
 package com.freedom.augmentedreality.gcm;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.freedom.augmentedreality.R;
 import com.google.android.gms.gcm.GcmListenerService;
 
 public class MyGcmListenerService extends GcmListenerService {
@@ -35,7 +39,8 @@ public class MyGcmListenerService extends GcmListenerService {
     // [START receive_message]
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("body");
+        String title = data.getString("title");
+        String body = data.getString("body");
         Log.d(TAG, "From: " + data);
         Log.d(TAG, "From: " + data.getString("body"));
         Log.d(TAG, "From: " + data.getString("title"));
@@ -58,7 +63,7 @@ public class MyGcmListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+        sendNotification(title, body);
         // [END_EXCLUDE]
     }
     // [END receive_message]
@@ -68,7 +73,15 @@ public class MyGcmListenerService extends GcmListenerService {
      *
      * @param message GCM message received.
      */
-    private void sendNotification(String message) {
+    private void sendNotification(String title, String body) {
+
+        NotificationManager notificationManager= (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_menu_gallery)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
+        notificationManager.notify(1, mBuilder.build());
 
     }
 }
