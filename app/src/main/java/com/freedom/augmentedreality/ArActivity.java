@@ -1,10 +1,12 @@
 package com.freedom.augmentedreality;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,9 +17,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.freedom.augmentedreality.detect.CameraActivity;
+import com.freedom.augmentedreality.fragments.ImageFragment;
 import com.freedom.augmentedreality.fragments.MarkerFragment;
+import com.freedom.augmentedreality.fragments.ProfileFragment;
+import com.freedom.augmentedreality.fragments.SettingsFragment;
 import com.freedom.augmentedreality.helper.SessionManager;
 import com.freedom.augmentedreality.user.LoginActivity;
 
@@ -44,6 +50,18 @@ public class ArActivity extends AppCompatActivity
         TextView name = (TextView) header.findViewById(R.id.txt_name);
         email.setText(session.getValue("email"));
         name.setText(session.getValue("name"));
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment profileFragment = new ProfileFragment();
+                fragmentTransaction.add(R.id.mainLayout, profileFragment).addToBackStack(null);
+                fragmentTransaction.commit();
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -105,15 +123,32 @@ public class ArActivity extends AppCompatActivity
         } else if (id == R.id.nav_data) {
 
         } else if (id == R.id.nav_settings) {
-
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment settingsFragment = new SettingsFragment();
+            fragmentTransaction.add(R.id.mainLayout, settingsFragment).addToBackStack(null);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_logout) {
-            SessionManager session = new SessionManager(getApplicationContext());
-            session.setLogin(false);
-            Intent i = new Intent(ArActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
+
+            new AlertDialog.Builder(this)
+                    .setMessage("Would you like to logout?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            SessionManager session = new SessionManager(getApplicationContext());
+                            session.setLogin(false);
+                            Intent i = new Intent(ArActivity.this, LoginActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
