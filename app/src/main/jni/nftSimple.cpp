@@ -234,7 +234,7 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject 
 #ifdef DEBUG
     LOGE("Marker count = %d\n", markersNFTCount);
 #endif
-    
+
 	return (true);
 }
 
