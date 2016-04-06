@@ -1,9 +1,11 @@
 package com.freedom.augmentedreality.model;
 
+import java.io.Serializable;
+
 /**
  * Created by hienbx94 on 3/21/16.
  */
-public class Marker {
+public class Marker implements Serializable{
     int _id;
     String _name;
     String _image;
