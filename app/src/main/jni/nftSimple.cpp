@@ -250,21 +250,15 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeStart(JNIEnv* env, jobject o
     	return (false);
     }
 
-    // Since most NFT init can't be completed until the video frame size is known,
-    // and NFT surface loading depends on NFT init, all that will be deferred.
-    
-    // Also, VirtualEnvironment init depends on having an OpenGL context, and so that also 
-    // forces us to defer VirtualEnvironment init.
-    
-    // ARGL init depends on both these things, which forces us to defer it until the
-    // main frame loop.
-        
+
+
 	return (true);
 }
 
 // cleanup();
 JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeStop(JNIEnv* env, jobject object))
 {
+
 #ifdef DEBUG
     LOGI("nativeStop\n");
 #endif
@@ -333,6 +327,9 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeDestroy(JNIEnv* env, jobject
 
 JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeVideoInit(JNIEnv* env, jobject object, jint w, jint h, jint cameraIndex, jboolean cameraIsFrontFacing))
 {
+
+
+
 #ifdef DEBUG
     LOGI("nativeVideoInit\n");
 #endif
@@ -954,7 +951,16 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeDrawFrame(JNIEnv* env, jobject o
     // Draw an object on all valid markers.
     for (int i = 0; i < markersNFTCount; i++) {
         if (markersNFT[i].valid) {
-            glLoadMatrixf(markersNFT[i].pose.T);        
+            glLoadMatrixf(markersNFT[i].pose.T);
+
+
+            jclass dataClass = env->FindClass("com/freedom/augmentedreality/detect/CameraActivity");
+            jclass javaClassRef = (jclass) env->NewGlobalRef(dataClass);
+            jmethodID javaMethodRef = env->GetMethodID(javaClassRef, "messageMe", "(I)V");
+            jobject javaObjectRef = env->NewObject(javaClassRef, javaMethodRef);
+
+            env->CallVoidMethod(javaObjectRef, javaMethodRef, i);
+
             drawCube(40.0f, 0.0f, 0.0f, 20.0f);
         }
     }

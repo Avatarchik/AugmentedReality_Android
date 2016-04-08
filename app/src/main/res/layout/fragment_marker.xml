@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:background="#d9d9d9"
     tools:context="com.freedom.augmentedreality.fragments.MarkerFragment">
 
@@ -13,11 +14,50 @@
         android:divider="@color/list_divider"
         android:listSelector="@drawable/list_row_selector"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_menu_gallery" />
+        fab:fab_addButtonColorNormal="@color/white"
+        fab:fab_addButtonColorPressed="@color/white_pressed"
+        fab:fab_addButtonSize="normal"
+        fab:fab_addButtonPlusIconColor="@color/half_black"
+        fab:fab_expandDirection="up"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_gravity="bottom|end">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_new_marker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_addButtonSize="mini"
+            fab:fab_colorNormal="@color/white_btn"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_icon="@mipmap/image"
+            fab:fab_title="New marker"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/button_gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white_btn"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_icon="@mipmap/onedrive"
+            fab:fab_title="Marker local"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_enable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/white_btn"
+            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_icon="@mipmap/cellphone"
+            fab:fab_title="Marker server" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
 </FrameLayout>

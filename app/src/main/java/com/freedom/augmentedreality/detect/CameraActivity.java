@@ -9,6 +9,8 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.StringBuilderPrinter;
 import android.view.Display;
 import android.view.ViewConfiguration;
 import android.view.Window;
@@ -152,5 +154,14 @@ public class CameraActivity extends AppCompatActivity {
         super.onDestroy();
 
         CameraActivity.nativeDestroy();
+    }
+
+//    public void messageMe(int message) {
+//        Log.e("TAG", String.valueOf(message));
+//
+//    }
+    public void messageMe(int message) {
+        Log.e("TAG", String.valueOf(message));
+
     }
 }

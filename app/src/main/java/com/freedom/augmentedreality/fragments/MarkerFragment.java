@@ -7,12 +7,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Movie;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -50,7 +48,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import android.view.View.OnClickListener;
 
 public class MarkerFragment extends Fragment {
 
@@ -76,10 +75,11 @@ public class MarkerFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_marker, container, false);
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        final FloatingActionButton removeAction = (FloatingActionButton) view.findViewById(R.id.btn_new_marker);
+        removeAction.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 selectImage();
             }
         });
