@@ -87,12 +87,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, marker.get_id());
-        values.put(KEY_NAME, marker.get_name());
-        values.put(KEY_IMAGE, marker.get_image());
-        values.put(KEY_ISET, marker.get_iset());
-        values.put(KEY_FSET, marker.get_fset());
-        values.put(KEY_FSET3, marker.get_fset3());
+        values.put(KEY_ID, marker.getId());
+        values.put(KEY_NAME, marker.getName());
+        values.put(KEY_IMAGE, marker.getImage());
+        values.put(KEY_ISET, marker.getIset());
+        values.put(KEY_FSET, marker.getFset());
+        values.put(KEY_FSET3, marker.getFset3());
 
         db.insert(TABLE_MARKER, null, values);
     }
@@ -108,9 +108,9 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Marker marker = new Marker();
-                marker.set_id(Integer.parseInt(cursor.getString(0)));
-                marker.set_name(cursor.getString(2));
-                marker.set_image(cursor.getString(3));
+                marker.setId(Integer.parseInt(cursor.getString(0)));
+                marker.setName(cursor.getString(2));
+                marker.setImage(cursor.getString(3));
 
                 markerList.add(marker);
             } while (cursor.moveToNext());

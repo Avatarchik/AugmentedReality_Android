@@ -60,7 +60,7 @@ public class MarkerDetailFragment extends Fragment {
 
         Button btn_download = (Button) view.findViewById(R.id.btn_download);
         txt_test = (TextView) view.findViewById(R.id.txt_test);
-        txt_test.setText(marker.getUserName());
+        txt_test.setText(marker.getUsername());
 
         btn_download.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class MarkerDetailFragment extends Fragment {
     }
 
     private void changeMarkerDat() {
-        String url_file = marker.get_iset();
+        String url_file = marker.getIset();
         String namefile = url_file.substring(url_file.lastIndexOf("/") + 1, url_file.lastIndexOf("."));
         StringBuilder text = new StringBuilder();
         try {
@@ -172,9 +172,9 @@ public class MarkerDetailFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            downloadFile(marker.get_iset());
-            downloadFile(marker.get_fset());
-            downloadFile(marker.get_fset3());
+            downloadFile(marker.getIset());
+            downloadFile(marker.getFset());
+            downloadFile(marker.getFset3());
             return null;
         }
 

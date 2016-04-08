@@ -50,10 +50,10 @@ public class MarkersAdapter extends RecyclerView.Adapter<MarkersAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Marker marker = markersList.get(position);
-        holder.name.setText(marker.get_name());
+        holder.name.setText(marker.getName());
         holder.create_at.setText(marker.getCreatedAt());
-        holder.user_name.setText(marker.getUserName());
-        String image_link = AppConfig.baseURL + marker.get_image();
+        holder.user_name.setText(marker.getUsername());
+        String image_link = AppConfig.baseURL + marker.getImage();
         holder.image.setImageUrl(image_link, ArApplication.getInstance().getImageLoader());
     }
 

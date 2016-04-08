@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white_btn"
             fab:fab_colorPressed="@color/white_pressed"
-            fab:fab_icon="@mipmap/onedrive"
+            fab:fab_icon="@mipmap/cellphone"
             fab:fab_title="Marker local"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white_btn"
             fab:fab_colorPressed="@color/white_pressed"
-            fab:fab_icon="@mipmap/cellphone"
+            fab:fab_icon="@mipmap/onedrive"
             fab:fab_title="Marker server" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
