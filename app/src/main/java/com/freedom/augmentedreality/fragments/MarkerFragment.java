@@ -76,8 +76,8 @@ public class MarkerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_marker, container, false);
 
 
-        final FloatingActionButton removeAction = (FloatingActionButton) view.findViewById(R.id.btn_new_marker);
-        removeAction.setOnClickListener(new OnClickListener() {
+        final FloatingActionButton newMarker = (FloatingActionButton) view.findViewById(R.id.btn_new_marker);
+        newMarker.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage();
@@ -130,7 +130,6 @@ public class MarkerFragment extends Fragment {
     private void selectImage() {
         final CharSequence[] items = { "Take Photo", "Choose from Library", "Cancel" };
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//        builder.setTitle( Html.fromHtml("<b>New Marker</b>"));
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
