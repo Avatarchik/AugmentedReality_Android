@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.freedom.augmentedreality.R;
 import com.freedom.augmentedreality.app.AppConfig;
+import com.freedom.augmentedreality.helper.SQLiteHandler;
 import com.freedom.augmentedreality.model.Marker;
 
 import java.io.BufferedInputStream;
@@ -38,7 +39,7 @@ import java.net.URLConnection;
  * A simple {@link Fragment} subclass.
  */
 public class MarkerDetailFragment extends Fragment {
-
+    SQLiteHandler db ;
     private Marker marker;
     private ProgressDialog pDialog;
     private TextView txt_test;
@@ -53,6 +54,7 @@ public class MarkerDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
+        db = new SQLiteHandler(getActivity());
 
         marker = (Marker) getArguments().getSerializable("marker");
 
@@ -80,6 +82,7 @@ public class MarkerDetailFragment extends Fragment {
     }
 
     private void changeMarkerDat() {
+
         String url_file = marker.getIset();
         String namefile = url_file.substring(url_file.lastIndexOf("/") + 1, url_file.lastIndexOf("."));
         StringBuilder text = new StringBuilder();
@@ -89,31 +92,34 @@ public class MarkerDetailFragment extends Fragment {
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             int i = 0;
-            String line;
-            while ((line = br.readLine()) != null) {
+            int pageNo = 0;
+
+            String line = br.readLine();
+            while (line != null) {
                 i++;
 
                 if(i == 1) {
+                    pageNo = Integer.valueOf(line.trim());
                     text.append(Integer.valueOf(line.trim()) + 1);
                     text.append('\n');
                 } else {
-                    if(i == 3) {
-                        text.append("../DataNFT/" + namefile);
-                        text.append('\n');
-                        text.append("NFT");
-                        text.append('\n');
-                        text.append("FILTER 15.0");
-                        text.append('\n');
-                        text.append('\n');
-                    }
-
                     text.append(line);
                     text.append('\n');
                 }
 
-
+                line = br.readLine();
+                if(line == null) {
+                    db.addMarker(pageNo , namefile);
+                    text.append('\n');
+                    text.append("../DataNFT/" + namefile);
+                    text.append('\n');
+                    text.append("NFT");
+                    text.append('\n');
+                    text.append("FILTER 15.0");
+                }
             }
             br.close();
+            db.closeDB();
         }
 
         catch (IOException e) {

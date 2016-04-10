@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -19,9 +20,14 @@ import android.widget.FrameLayout;
 import android.view.ViewGroup.LayoutParams;
 
 import com.freedom.augmentedreality.R;
+import com.freedom.augmentedreality.helper.SQLiteHandler;
 
-public class CameraActivity extends AppCompatActivity {
+import java.util.HashMap;
+import java.util.Locale;
 
+public class CameraActivity extends AppCompatActivity implements
+        TextToSpeech.OnInitListener{
+    private static Context context;
     private static final String TAG = "CameraActivity";
 
     static {
@@ -48,6 +54,9 @@ public class CameraActivity extends AppCompatActivity {
     private CameraSurface camSurface;
 
     private FrameLayout mainLayout;
+    static SQLiteHandler db;
+    static HashMap<String, String> markers;
+    static private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +83,8 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
 
         CameraActivity.nativeCreate(this);
-
+        CameraActivity.context = getApplicationContext();
+        tts = new TextToSpeech(CameraActivity.context, this);
     }
 
     private void updateNativeDisplayParameters()
@@ -156,12 +166,52 @@ public class CameraActivity extends AppCompatActivity {
         CameraActivity.nativeDestroy();
     }
 
-//    public void messageMe(int message) {
-//        Log.e("TAG", String.valueOf(message));
-//
-//    }
-    public void messageMe(int message) {
-        Log.e("TAG", String.valueOf(message));
+    static int i = 0;
 
+    public void messageMe(int message) {
+        if(this != null ) {
+//            this.logabc(message);
+            db = new SQLiteHandler(CameraActivity.context);
+            markers = db.getAllMarkers();
+
+//            tts = new TextToSpeech(CameraActivity.context);
+
+            if(message < 100) {
+                i++;
+                Log.e("XXX", String.valueOf(i));
+                if(i%20 == 0) {
+                    if(i > 2000) {
+                        i = 0;
+                    }
+                    speakOut(String.valueOf(markers.get(String.valueOf(message))));
+                    Log.e("XXX", String.valueOf(markers.get(String.valueOf(message))));
+                }
+
+            }
+        }
+    }
+
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+
+            int result = tts.setLanguage(Locale.US);
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            } else {
+                speakOut("Start tracking");
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+    }
+
+    private void speakOut(String text) {
+
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 }
