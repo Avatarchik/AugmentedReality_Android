@@ -18,22 +18,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:id="@+id/img_image"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                 />
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:hint="Marker name"
+                android:background="@drawable/list_row_bg"
+                android:id="@+id/marker_name"
+                />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:gravity="top"
                 android:layout_marginTop="20px"
-                android:hint="Marker name"
+                android:hint="Content"
+                android:lines="3"
+                android:inputType="textMultiLine"
                 android:background="@drawable/list_row_bg"
-                android:id="@+id/marker_name"
+                android:id="@+id/marker_content"
                 />
 
             <Button
@@ -45,7 +49,16 @@
                 android:layout_marginTop="20px"
                 android:text="Create marker"
                 android:background="@drawable/list_row_bg"
+                android:layout_marginBottom="10dp"
                 android:id="@+id/btn_create" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:id="@+id/img_image"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                 />
         </LinearLayout>
     </ScrollView>
 

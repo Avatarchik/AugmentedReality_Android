@@ -38,7 +38,7 @@ public class ImageFragment extends Fragment {
     private ImageView image;
     private Bitmap data;
     private Button btn_create;
-    private EditText marker_name;
+    private EditText marker_name, marker_content;
     private ProgressDialog pDialog;
     private SessionManager session;
     public ImageFragment() {
@@ -63,6 +63,7 @@ public class ImageFragment extends Fragment {
         image.setImageBitmap(data);
 
         marker_name = (EditText) view.findViewById(R.id.marker_name);
+        marker_content = (EditText) view.findViewById(R.id.marker_content);
 
         btn_create = (Button) view.findViewById(R.id.btn_create);
         btn_create.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +74,7 @@ public class ImageFragment extends Fragment {
                 byte[] byteArray = byteArrayOutputStream .toByteArray();
                 String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
 
-                createMarker(marker_name.getText().toString(), encoded);
+                createMarker(marker_name.getText().toString(), marker_content.getText().toString(), encoded);
 
             }
         });
@@ -81,7 +82,7 @@ public class ImageFragment extends Fragment {
         return view;
     }
 
-    private void createMarker(final String name, final String encoded) {
+    private void createMarker(final String name, final String content, final String encoded) {
         // Tag used to cancel the request
         String tag_string_req = "create_marker";
 
@@ -136,6 +137,7 @@ public class ImageFragment extends Fragment {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("name", name);
+                params.put("content", content);
                 params.put("base64", encoded);
                 return params;
             }

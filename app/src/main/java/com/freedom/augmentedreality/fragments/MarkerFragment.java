@@ -19,6 +19,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -189,18 +190,19 @@ public class MarkerFragment extends Fragment {
 
                 String selectedImagePath = cursor.getString(column_index);
 
+                Log.e("FFFF", selectedImagePath);
 
                 BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inJustDecodeBounds = true;
-                BitmapFactory.decodeFile(selectedImagePath, options);
-                final int REQUIRED_SIZE = 200;
-                int scale = 1;
-                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
-                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
-                    scale *= 2;
-                options.inSampleSize = scale;
-                options.inJustDecodeBounds = false;
-                bm = BitmapFactory.decodeFile(selectedImagePath, options);
+//                options.inJustDecodeBounds = true;
+//                BitmapFactory.decodeFile(selectedImagePath, options);
+//                final int REQUIRED_SIZE = 200;
+//                int scale = 1;
+//                while (options.outWidth / scale / 2 >= REQUIRED_SIZE
+//                        && options.outHeight / scale / 2 >= REQUIRED_SIZE)
+//                    scale *= 2;
+//                options.inSampleSize = scale;
+//                options.inJustDecodeBounds = false;
+                bm = BitmapFactory.decodeFile(selectedImagePath);
 
             }
 
