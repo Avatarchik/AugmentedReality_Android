@@ -15,11 +15,21 @@ public class Marker implements Serializable {
     String createdAt;
     String username;
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    String content;
+
     public Marker() {
     }
 
     public Marker(int id, String name, String image, String iset,
-                  String fset, String fset3, String created_at, String username) {
+                  String fset, String fset3, String created_at, String username, String content) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -28,6 +38,7 @@ public class Marker implements Serializable {
         this.fset3 = fset3;
         this.createdAt = created_at;
         this.username = username;
+        this.content = content;
     }
 
     public int getId() {
