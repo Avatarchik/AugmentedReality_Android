@@ -167,24 +167,24 @@ public class CameraActivity extends AppCompatActivity implements
     }
 
     static int i = 0;
+    static int pageNo = 0;
 
     public void messageMe(int message) {
         if(this != null ) {
-//            this.logabc(message);
             db = new SQLiteHandler(CameraActivity.context);
             markers = db.getAllMarkers();
 
-//            tts = new TextToSpeech(CameraActivity.context);
-
             if(message < 100) {
-                i++;
-                Log.e("XXX", String.valueOf(i));
-                if(i%20 == 0) {
-                    if(i > 2000) {
-                        i = 0;
-                    }
+                if(pageNo != message) {
                     speakOut(String.valueOf(markers.get(String.valueOf(message))));
-                    Log.e("XXX", String.valueOf(markers.get(String.valueOf(message))));
+                    pageNo = message;
+                    i = 0;
+                } else {
+                    i++;
+                    if(i%40 == 0) {
+                        if(i > 2000) i = 0;
+                        speakOut(String.valueOf(markers.get(String.valueOf(message))));
+                    }
                 }
 
             }
@@ -202,7 +202,7 @@ public class CameraActivity extends AppCompatActivity implements
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "This Language is not supported");
             } else {
-                speakOut("Start tracking");
+                speakOut("");
             }
 
         } else {
