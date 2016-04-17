@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.freedom.augmentedreality.detect.CameraActivity;
+import com.freedom.augmentedreality.fragments.DataFragment;
 import com.freedom.augmentedreality.fragments.ImageFragment;
 import com.freedom.augmentedreality.fragments.MarkerFragment;
 import com.freedom.augmentedreality.fragments.ProfileFragment;
@@ -122,7 +123,11 @@ public class ArActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.mainLayout, markerFragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_data) {
-
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Fragment dataFragment = new DataFragment();
+            fragmentTransaction.add(R.id.mainLayout, dataFragment).addToBackStack(null);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_settings) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
