@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.freedom.augmentedreality.R;
 import com.freedom.augmentedreality.app.AppConfig;
+import com.freedom.augmentedreality.app.ArApplication;
 import com.freedom.augmentedreality.helper.SQLiteHandler;
 import com.freedom.augmentedreality.model.Marker;
 
@@ -52,13 +54,26 @@ public class MarkerDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_marker_detail, container, false);
+
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
         db = new SQLiteHandler(getActivity());
 
         marker = (Marker) getArguments().getSerializable("marker");
 
-        View view = inflater.inflate(R.layout.fragment_marker_detail, container, false);
+
+        TextView name = (TextView) view.findViewById(R.id.name_marker);
+        TextView create_at = (TextView) view.findViewById(R.id.txt_create_at);
+        NetworkImageView image = (NetworkImageView) view.findViewById(R.id.image_marker);
+        TextView user_name = (TextView) view.findViewById(R.id.user_name);
+
+        name.setText(marker.getName());
+        create_at.setText(marker.getCreatedAt());
+        user_name.setText(marker.getUsername());
+        String image_link = AppConfig.baseURL + marker.getImage();
+        image.setImageUrl(image_link, ArApplication.getInstance().getImageLoader());
+
 
         Button btn_download = (Button) view.findViewById(R.id.btn_download);
         txt_test = (TextView) view.findViewById(R.id.txt_test);
