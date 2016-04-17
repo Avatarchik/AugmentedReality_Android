@@ -172,7 +172,7 @@ public class CameraActivity extends AppCompatActivity implements
     public void messageMe(int message) {
         if(this != null ) {
             db = new SQLiteHandler(CameraActivity.context);
-            markers = db.getAllMarkers();
+            markers = db.getAllContentMarkers();
 
             if(message < 100) {
                 if(pageNo != message) {

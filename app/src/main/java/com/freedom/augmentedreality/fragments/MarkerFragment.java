@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -35,6 +37,7 @@ import com.freedom.augmentedreality.app.ArApplication;
 import com.freedom.augmentedreality.R;
 import com.freedom.augmentedreality.adapters.MarkersAdapter;
 import com.freedom.augmentedreality.app.AppConfig;
+import com.freedom.augmentedreality.helper.SQLiteHandler;
 import com.freedom.augmentedreality.model.Marker;
 import com.freedom.augmentedreality.ulti.VerticalSpaceItemDecoration;
 
@@ -50,6 +53,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 import android.view.View.OnClickListener;
 
 public class MarkerFragment extends Fragment {
@@ -60,6 +65,7 @@ public class MarkerFragment extends Fragment {
     private List<Marker> markerList = new ArrayList<>();
     private static Integer REQUEST_CAMERA = 1;
     private static Integer SELECT_FILE = 2;
+    private SQLiteHandler db ;
 
     public MarkerFragment() {
     }
@@ -76,14 +82,18 @@ public class MarkerFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_marker, container, false);
 
+        db = new SQLiteHandler(getActivity());
+        final FloatingActionsMenu menu = (FloatingActionsMenu) view.findViewById(R.id.multiple_actions_down);
 
         final FloatingActionButton newMarker = (FloatingActionButton) view.findViewById(R.id.btn_new_marker);
         newMarker.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                menu.collapse();
                 selectImage();
             }
         });
+
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
@@ -95,6 +105,7 @@ public class MarkerFragment extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         recyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 
@@ -118,6 +129,27 @@ public class MarkerFragment extends Fragment {
         }));
 
         getMarkers();
+
+        final FloatingActionButton localMarker = (FloatingActionButton) view.findViewById(R.id.button_local);
+        localMarker.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menu.collapse();
+                markerList.clear();
+                markerList.addAll(db.getAllMarkers());
+                db.closeDB();
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+
+        final FloatingActionButton serverMarker = (FloatingActionButton) view.findViewById(R.id.button_server);
+        serverMarker.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menu.collapse();
+                getMarkers();
+            }
+        });
 
         return view;
     }
@@ -219,7 +251,7 @@ public class MarkerFragment extends Fragment {
 
 
     public void getMarkers() {
-
+        markerList.clear();
         String tag_string_req = "get_all_marker";
 
         pDialog.setMessage("Sync marker ...");

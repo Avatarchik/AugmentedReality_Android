@@ -109,7 +109,9 @@ public class MarkerDetailFragment extends Fragment {
 
                 line = br.readLine();
                 if(line == null) {
-                    db.addMarker(pageNo , marker.getContent());
+                    db.addMarker(marker.getId(), pageNo , marker.getContent(),
+                            marker.getName(), marker.getUsername(), marker.getCreatedAt(),
+                            marker.getImage(), marker.getIset(), marker.getFset(), marker.getFset3());
                     text.append('\n');
                     text.append("../DataNFT/" + namefile);
                     text.append('\n');
