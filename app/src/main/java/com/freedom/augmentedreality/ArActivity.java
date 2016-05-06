@@ -122,12 +122,12 @@ public class ArActivity extends AppCompatActivity
             Fragment markerFragment = new MarkerFragment();
             fragmentTransaction.replace(R.id.mainLayout, markerFragment);
             fragmentTransaction.commit();
-        } else if (id == R.id.nav_data) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            Fragment dataFragment = new DataFragment();
-            fragmentTransaction.add(R.id.mainLayout, dataFragment).addToBackStack(null);
-            fragmentTransaction.commit();
+//        } else if (id == R.id.nav_data) {
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//            Fragment dataFragment = new DataFragment();
+//            fragmentTransaction.add(R.id.mainLayout, dataFragment).addToBackStack(null);
+//            fragmentTransaction.commit();
         } else if (id == R.id.nav_settings) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
