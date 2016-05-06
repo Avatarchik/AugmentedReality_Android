@@ -5,7 +5,7 @@ package com.freedom.augmentedreality.app;
  */
 public class AppConfig {
 
-    public static String baseURL = "http://vntech.me";
+    public static String baseURL = "http://188.166.221.9/";
 
     public static String URL_LOGIN = baseURL + "/api/sessions";
     public static String URL_REGISTER = baseURL + "/api/users";
