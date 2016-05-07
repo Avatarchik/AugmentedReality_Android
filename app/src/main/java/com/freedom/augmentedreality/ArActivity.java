@@ -88,7 +88,7 @@ public class ArActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.ar, menu);
+//        getMenuInflater().inflate(R.menu.ar, menu);
         return true;
     }
 
@@ -100,9 +100,9 @@ public class ArActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -135,11 +135,22 @@ public class ArActivity extends AppCompatActivity
             fragmentTransaction.add(R.id.mainLayout, settingsFragment).addToBackStack(null);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_share) {
+            new AlertDialog.Builder(this)
+                    .setMessage("Share app on Facebook ?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
         } else if (id == R.id.nav_logout) {
 
             new AlertDialog.Builder(this)
-                    .setMessage("Would you like to logout?")
+                    .setMessage("Would you like to logout ?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             SessionManager session = new SessionManager(getApplicationContext());

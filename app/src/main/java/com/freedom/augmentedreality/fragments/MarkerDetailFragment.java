@@ -77,7 +77,7 @@ public class MarkerDetailFragment extends Fragment {
 
         Button btn_download = (Button) view.findViewById(R.id.btn_download);
         txt_test = (TextView) view.findViewById(R.id.txt_test);
-        txt_test.setText(marker.getUsername());
+        txt_test.setText("");
 
         btn_download.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +156,7 @@ public class MarkerDetailFragment extends Fragment {
             Log.e("Exception", "File write failed: " + e.toString());
         }
 
-        txt_test.setText(text.toString());
+//        txt_test.setText(text.toString());
     }
 
     class DownloadFileFromURL extends AsyncTask<Void, Void, Void> {
