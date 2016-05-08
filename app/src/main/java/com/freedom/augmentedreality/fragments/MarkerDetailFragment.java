@@ -59,25 +59,25 @@ public class MarkerDetailFragment extends Fragment {
         pDialog = new ProgressDialog(getActivity());
         pDialog.setCancelable(false);
         db = new SQLiteHandler(getActivity());
-
         marker = (Marker) getArguments().getSerializable("marker");
-
-
         TextView name = (TextView) view.findViewById(R.id.name_marker);
         TextView create_at = (TextView) view.findViewById(R.id.txt_create_at);
         NetworkImageView image = (NetworkImageView) view.findViewById(R.id.image_marker);
         TextView user_name = (TextView) view.findViewById(R.id.user_name);
-
         name.setText(marker.getName());
         create_at.setText(marker.getCreatedAt());
         user_name.setText(marker.getUsername());
         String image_link = AppConfig.baseURL + marker.getImage();
         image.setImageUrl(image_link, ArApplication.getInstance().getImageLoader());
-
-
         Button btn_download = (Button) view.findViewById(R.id.btn_download);
         txt_test = (TextView) view.findViewById(R.id.txt_test);
-        txt_test.setText("");
+        txt_test.setText(marker.getContent());
+
+        if(db.checkMarker(marker)) {
+            btn_download.setText("Remove");
+        } else {
+            btn_download.setText("Save");
+        }
 
         btn_download.setOnClickListener(new View.OnClickListener() {
             @Override

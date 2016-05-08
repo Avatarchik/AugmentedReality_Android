@@ -87,6 +87,17 @@ public class SQLiteHandler extends SQLiteOpenHelper {
             db.close();
     }
 
+    public boolean checkMarker(Marker marker) {
+        String name_marker = marker.getName();
+        String selectQuery = "SELECT  * FROM " + TABLE_MARKER + " WHERE " + KEY_NAME + " = ?";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[] { name_marker });
+        if(cursor.getCount() > 0 ){
+            return true;
+        } else {
+            return false;
+        }
+    }
     public HashMap<String, String> getAllContentMarkers() {
         HashMap<String, String> markers = new HashMap<String, String>();
 
@@ -97,7 +108,7 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                markers.put(cursor.getString(1), cursor.getString(2));
+                markers.put(cursor.getString(1), cursor.getString(5));
 
             } while (cursor.moveToNext());
         }

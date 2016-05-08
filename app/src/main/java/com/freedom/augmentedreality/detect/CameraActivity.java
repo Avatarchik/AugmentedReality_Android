@@ -197,7 +197,7 @@ public class CameraActivity extends AppCompatActivity implements
         if (status == TextToSpeech.SUCCESS) {
 
             int result = tts.setLanguage(Locale.US);
-
+            tts.setSpeechRate(0.8f);
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("TTS", "This Language is not supported");
